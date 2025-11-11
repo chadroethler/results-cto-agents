@@ -5,4 +5,4 @@ Monitors RSS feeds for technical debt signals
 
 from .agent import TechnicalDebtScanner
 
-__all__ = ['TechnicalDebtScanner']
+__all__ = ["TechnicalDebtScanner"]

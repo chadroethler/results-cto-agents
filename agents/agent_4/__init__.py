@@ -5,4 +5,4 @@ Monitors Reddit for regional business signals
 
 from .agent import RegionalNewsMonitor
 
-__all__ = ['RegionalNewsMonitor']
+__all__ = ["RegionalNewsMonitor"]
