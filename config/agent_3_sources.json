@@ -1,0 +1,30 @@
+{
+  "rss_feeds": [
+    {
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "priority": "high"
+    },
+    {
+      "name": "GitHub Trending",
+      "url": "https://github.com/trending.atom",
+      "priority": "medium"
+    },
+    {
+      "name": "Hacker News",
+      "url": "https://news.ycombinator.com/rss",
+      "priority": "high"
+    },
+    {
+      "name": "Dev.to",
+      "url": "https://dev.to/feed",
+      "priority": "medium"
+    },
+    {
+      "name": "The New Stack",
+      "url": "https://thenewstack.io/feed/",
+      "priority": "high"
+    }
+  ],
+  "update_frequency_minutes": 60
+}

@@ -1,0 +1,40 @@
+{
+  "technical_debt_signals": [
+    "legacy system",
+    "technical debt",
+    "refactor",
+    "modernization",
+    "migration",
+    "deprecated",
+    "outdated infrastructure",
+    "monolith to microservices",
+    "code cleanup",
+    "tech stack overhaul"
+  ],
+  "pain_point_signals": [
+    "scaling issues",
+    "performance problems",
+    "downtime",
+    "slow deployments",
+    "manual processes",
+    "difficult to maintain",
+    "breaking frequently",
+    "hard to test"
+  ],
+  "solution_seeking": [
+    "looking for cto",
+    "hiring technical consultant",
+    "need technical leadership",
+    "seeking architecture advice",
+    "modernization project",
+    "digital transformation"
+  ],
+  "company_size_indicators": [
+    "series a",
+    "series b",
+    "startup",
+    "growing team",
+    "scaling",
+    "raised funding"
+  ]
+}

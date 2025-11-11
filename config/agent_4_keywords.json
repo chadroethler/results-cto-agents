@@ -1,0 +1,39 @@
+{
+  "expansion_signals": [
+    "opening new office",
+    "expanding to",
+    "new location",
+    "regional expansion",
+    "opening headquarters",
+    "new branch"
+  ],
+  "funding_signals": [
+    "raised funding",
+    "series a",
+    "series b",
+    "seed round",
+    "venture capital",
+    "funding round",
+    "investment"
+  ],
+  "hiring_signals": [
+    "hiring",
+    "looking for",
+    "seeking",
+    "join our team",
+    "we're growing",
+    "positions open",
+    "careers",
+    "cto",
+    "vp engineering",
+    "head of product"
+  ],
+  "growth_signals": [
+    "fastest growing",
+    "doubled revenue",
+    "scaling",
+    "rapid growth",
+    "expanding team",
+    "inc 5000"
+  ]
+}

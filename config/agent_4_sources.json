@@ -1,0 +1,22 @@
+{
+  "subreddits": [
+    "programming",
+    "webdev",
+    "SaaS",
+    "startups",
+    "entrepreneur",
+    "technology",
+    "softwaredevelopment"
+  ],
+  "regional_focus": [
+    "midwest",
+    "iowa",
+    "chicago",
+    "minneapolis",
+    "kansas city",
+    "st louis",
+    "omaha",
+    "des moines"
+  ],
+  "check_frequency_hours": 4
+}
