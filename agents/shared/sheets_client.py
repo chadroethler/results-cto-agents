@@ -4,7 +4,7 @@ Google Sheets client for agent interactions
 
 import logging
 import os
-from typing import List, Optional
+from typing import Dict, List
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError

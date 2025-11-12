@@ -4,18 +4,19 @@ Monitors RSS feeds for technical debt signals and companies seeking help
 """
 
 import os
+
+from shared.sheets_client import SheetsClient
+from shared.utils import load_json_config, setup_logging, sanitize_text, get_timestamp, get_date
+
 import sys
-import logging
+# import logging
 import feedparser
-from datetime import datetime
+# from datetime import datetime
 from typing import List, Dict, Optional
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from shared.sheets_client import SheetsClient
-from shared.utils import load_json_config, setup_logging, sanitize_text, get_timestamp, get_date
 
 logger = setup_logging("agent_3")
 

@@ -2,19 +2,18 @@
 Agent 4: Regional News Monitor
 Monitors Reddit and regional sources for expansion, funding, and hiring signals
 """
+from shared.sheets_client import SheetsClient
+from shared.utils import load_json_config, setup_logging, sanitize_text, get_timestamp, get_date
 
 import os
 import sys
-import logging
+# import logging
 import praw
 from datetime import datetime, timedelta
 from typing import List, Dict, Optional, Tuple
 
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from shared.sheets_client import SheetsClient
-from shared.utils import load_json_config, setup_logging, sanitize_text, get_timestamp, get_date
 
 logger = setup_logging("agent_4")
 
@@ -99,7 +98,7 @@ class RegionalNewsMonitor:
 
         words = text.split()
         for i, word in enumerate(words):
-            word_lower = word.lower()
+            # word_lower = word.lower()
             for pattern in patterns:
                 if pattern in " ".join(words[max(0, i - 2) : i + 1]).lower():
                     if i + 1 < len(words):
