@@ -65,3 +65,4 @@ temp/
 terraform.tfstate
 terraform.tfstate.backup
 .terraform/
+test_creds.json
