@@ -145,3 +145,45 @@ class SheetsClient:
         ).execute()
 
         return result.get('values', [])
+
+    def check_duplicate(
+        self,
+        sheet_name: str,
+        column: str,
+        value: str
+    ) -> bool:
+        """
+        Check if a value already exists in a specific column
+
+        Args:
+            sheet_name: Name of the sheet
+            column: Column letter (e.g., 'A', 'B', 'E')
+            value: Value to check for
+
+        Returns:
+            True if duplicate exists, False otherwise
+        """
+        if self.testing:
+            return False
+
+        try:
+            # Read the specific column
+            range_name = f"{sheet_name}!{column}:{column}"
+            result = self.service.spreadsheets().values().get(
+                spreadsheetId=self.spreadsheet_id,
+                range=range_name
+            ).execute()
+
+            values = result.get('values', [])
+
+            # Check if value exists in the column
+            for row in values:
+                if row and len(row) > 0 and row[0] == value:
+                    return True
+
+            return False
+
+        except Exception as e:
+            # If there's an error reading, assume not a duplicate
+            print(f"Error checking duplicate: {e}")
+            return False
