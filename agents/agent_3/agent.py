@@ -9,9 +9,7 @@ from shared.sheets_client import SheetsClient
 from shared.utils import load_json_config, setup_logging, sanitize_text, get_timestamp, get_date
 
 import sys
-# import logging
 import feedparser
-# from datetime import datetime
 from typing import List, Dict, Optional
 from tenacity import retry, stop_after_attempt, wait_exponential
 
@@ -198,24 +196,28 @@ class TechnicalDebtScanner:
         logger.info(f"Writing {len(signals)} signals to Google Sheets")
 
         # Prepare rows for Automation Queue tab
+        # Column order: Queue ID, Agent Source, Company Name, Signal Type,
+        # Signal Details, Priority Score, Status, Date Added, Action Required,
+        # Assigned To, Notes
         rows = []
         for signal in signals:
-            # Skip duplicates
-            if self.sheets_client.check_duplicate("Automation Queue", "E", signal["source_url"]):
+            # Skip duplicates - check column K (Notes) which has the URL
+            if self.sheets_client.check_duplicate("Automation Queue", "K", signal["source_url"]):
                 logger.info(f"Skipping duplicate: {signal['source_url']}")
                 continue
 
             row = [
-                get_timestamp(),  # Timestamp
-                signal["company_name"],
-                signal["signal_type"],
-                signal["signal_description"],
-                signal["source_url"],
-                signal["detected_date"],
-                "Agent 3",
-                "Pending Review",
-                "",  # Notes (empty)
-                signal["relevance_score"],
+                "",  # Queue ID (empty - can add auto-increment later)
+                "Agent 3",  # Agent Source
+                signal.get("company_name", "Unknown"),  # Company Name
+                signal.get("signal_type", "Technical Debt"),  # Signal Type
+                signal.get("signal_description", ""),  # Signal Details
+                signal.get("relevance_score", 2),  # Priority Score
+                "Pending Review",  # Status
+                get_date(),  # Date Added
+                "",  # Action Required (empty)
+                "",  # Assigned To (empty)
+                signal.get("source_url", ""),  # Notes (URL)
             ]
             rows.append(row)
 
