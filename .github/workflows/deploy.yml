@@ -85,7 +85,7 @@ jobs:
             --allow-unauthenticated \
             --timeout=540s \
             --memory=512MB \
-            --set-env-vars="SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }},AGENT_3_ENABLED=true,LOG_LEVEL=INFO,ENVIRONMENT=production"
+           --set-env-vars="SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }},CREDENTIALS_FILE=default,AGENT_3_ENABLED=true,LOG_LEVEL=INFO,ENVIRONMENT=production" 
 
       - name: Deploy Agent 4
         run: |
@@ -99,7 +99,7 @@ jobs:
             --allow-unauthenticated \
             --timeout=540s \
             --memory=512MB \
-            --set-env-vars="SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }},REDDIT_CLIENT_ID=${{ secrets.REDDIT_CLIENT_ID }},REDDIT_CLIENT_SECRET=${{ secrets.REDDIT_CLIENT_SECRET }},REDDIT_USER_AGENT=${{ secrets.REDDIT_USER_AGENT }},AGENT_4_ENABLED=true,LOG_LEVEL=INFO,ENVIRONMENT=production"
+            --set-env-vars="SPREADSHEET_ID=${{ secrets.SPREADSHEET_ID }},REDDIT_CLIENT_ID=${{ secrets.REDDIT_CLIENT_ID }},REDDIT_CLIENT_SECRET=${{ secrets.REDDIT_CLIENT_SECRET }},REDDIT_USER_AGENT=${{ secrets.REDDIT_USER_AGENT }},CREDENTIALS_FILE=default,AGENT_4_ENABLED=true,LOG_LEVEL=INFO,ENVIRONMENT=production"
 
       - name: Configure Cloud Scheduler
         run: |
