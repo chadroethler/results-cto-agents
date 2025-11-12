@@ -32,21 +32,24 @@ class SheetsClient:
             os.getenv("TESTING") == "true"
         )
 
-        self.credentials_file = credentials_file or os.getenv(
-            "CREDENTIALS_FILE"
-        )
+        self.credentials_file = credentials_file or os.getenv("CREDENTIALS_FILE")
         self.spreadsheet_id = spreadsheet_id or os.getenv("SPREADSHEET_ID")
 
         if not self.testing:
-            if not self.credentials_file or not self.spreadsheet_id:
-                raise ValueError(
-                    "credentials_file and spreadsheet_id must be provided"
-                )
+            if not self.spreadsheet_id:
+                raise ValueError("spreadsheet_id must be provided")
 
-            # Load credentials and build service
-            creds = Credentials.from_service_account_file(
-                self.credentials_file, scopes=self.SCOPES
-            )
+            # Use default credentials in Cloud Functions, file-based elsewhere
+            if self.credentials_file and self.credentials_file != "default":
+                # Local development with service account file
+                creds = Credentials.from_service_account_file(
+                    self.credentials_file, scopes=self.SCOPES
+                )
+            else:
+                # Cloud Functions - use Application Default Credentials
+                from google.auth import default
+                creds, _ = default(scopes=self.SCOPES)
+
             self.service = build('sheets', 'v4', credentials=creds)
         else:
             # In test mode, don't initialize credentials
@@ -81,6 +84,23 @@ class SheetsClient:
         ).execute()
 
         return result
+
+    def append_rows(
+        self,
+        sheet_name: str,
+        rows: List[List]
+    ) -> Dict:
+        """
+        Append multiple rows to the spreadsheet
+
+        Args:
+            sheet_name: Name of the sheet
+            rows: List of rows (each row is a list of values)
+
+        Returns:
+            Response from Sheets API
+        """
+        return self.append_row(rows, sheet_name)
 
     def batch_append(
         self,
