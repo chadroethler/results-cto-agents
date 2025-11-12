@@ -14,8 +14,8 @@ class SheetsClient:
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
     def __init__(
-        self, 
-        credentials_file: str = None, 
+        self,
+        credentials_file: str = None,
         spreadsheet_id: str = None,
         testing: bool = None
     ):
@@ -31,7 +31,7 @@ class SheetsClient:
         self.testing = testing if testing is not None else (
             os.getenv("TESTING") == "true"
         )
-        
+
         self.credentials_file = credentials_file or os.getenv(
             "CREDENTIALS_FILE"
         )
@@ -53,8 +53,8 @@ class SheetsClient:
             self.service = None
 
     def append_row(
-        self, 
-        values: List[List], 
+        self,
+        values: List[List],
         sheet_name: str = "Sheet1"
     ) -> Dict:
         """
@@ -69,7 +69,7 @@ class SheetsClient:
         """
         if self.testing:
             return {"updates": {"updatedRows": len(values)}}
-            
+
         range_name = f"{sheet_name}!A:Z"
         body = {'values': values}
 
@@ -83,8 +83,8 @@ class SheetsClient:
         return result
 
     def batch_append(
-        self, 
-        data: List[Dict], 
+        self,
+        data: List[Dict],
         sheet_name: str = "Sheet1"
     ) -> Dict:
         """
@@ -99,12 +99,12 @@ class SheetsClient:
         """
         if self.testing:
             return {"totalUpdatedRows": len(data)}
-            
+
         values = [[str(v) for v in row.values()] for row in data]
         return self.append_row(values, sheet_name)
 
     def read_sheet(
-        self, 
+        self,
         range_name: str = "Sheet1!A:Z"
     ) -> List[List]:
         """
@@ -118,7 +118,7 @@ class SheetsClient:
         """
         if self.testing:
             return []
-            
+
         result = self.service.spreadsheets().values().get(
             spreadsheetId=self.spreadsheet_id,
             range=range_name
